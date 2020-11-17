@@ -1,7 +1,7 @@
 import xlrd
 
-def lectura():
-    loc = ('/Users/anagu/OneDrive/Documentos/TEC/SemestreII2020/VD/Proyecto2/datos.xls')
+def lectura(path):
+    loc = path
 
     # To open Workbook
     wb = xlrd.open_workbook(loc)
