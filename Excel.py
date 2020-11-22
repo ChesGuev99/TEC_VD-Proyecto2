@@ -19,4 +19,6 @@ def lectura(path):
         dataDicc[ejeName] = dataSet
 
         print(dataDicc[ejeName])
+        print(len(dataDicc[ejeName]))
+    return dataDicc
 
