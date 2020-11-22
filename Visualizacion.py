@@ -1,9 +1,17 @@
 import plotly.graph_objects as go
 
 
+def obtenerMaximoDatos(lista):
+    valorMaximo=0
+    for elemento in lista:
+        if(len(elemento)>valorMaximo):
+            print(len(elemento))
+            valorMaximo=len(elemento)+1
+    return 396
+
 # Funcion encargada de generar los diccionarios de valores a visualizar
-def visualizar(dataSet):
-    datos = []                                                              # Lista de datos a graficar
+def visualizar(dataSet, valoresGUI):
+    datos = []
     for item in dataSet:                                                    # Para cada elemento en el dicc dataSet
         if ((str(dataSet[item][0])).isdigit()) or isinstance((dataSet[item][0]), float):   # En caso de que sean números
             dicc = dict(label=item, values=dataSet[item])
@@ -21,12 +29,14 @@ def visualizar(dataSet):
             dicc = dict(range=[1, max], tickvals=list(range(1, max+1)), label=item,
                         values=ubicaciones, ticktext=columna)
         datos.append(dicc)                                                 # Agregue el elemento a datos
-    ejemplohtml(datos)
+    valorMaximo=obtenerMaximoDatos(datos)
+    ejemplohtml(datos, valoresGUI, valorMaximo)
 
 
 # Funcion encargada de generar la visualización con los datos correspondientes
-def ejemplohtml(datos):
-    fig = go.Figure(data=go.Parcoords(line_color='blue', dimensions=datos))
+def ejemplohtml(datos, dicc, valorMaximo):
+    
+    fig = go.Figure(data=go.Parcoords(line_color=list(range(1, valorMaximo)), line_colorscale = dicc["ScaleNam"], dimensions=datos))
 
     # NEED FIX
     config = dict({
