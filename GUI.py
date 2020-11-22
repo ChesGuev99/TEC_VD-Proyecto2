@@ -3,6 +3,8 @@ from tkinter import colorchooser, ttk, messagebox
 from PIL import ImageTk, Image
 from functools import partial
 from Prueba_filedialog import buscarArchivo
+from Excel import lectura
+from Visualizacion import visualizar
 
 normalizada = False
 
@@ -62,7 +64,7 @@ graphImagFinal = ImageTk.PhotoImage(imag)
 canvas.create_image(150, 100, image=graphImagFinal, anchor='nw')
 
 # SECCION DE BIENVENIDA
-txtBienve = "!Bienvenidos!\nPronto Visualizaremos el gráfico"
+txtBienve = "¡Bienvenidos!\nPronto Visualizaremos el gráfico"
 bienv = tk.Label(canvas, width=30, text=txtBienve, fg='black', bg='#CBBC91',
                  font=("Verdana", 14), borderwidth=4, relief="groove")
 bienv.pack()
@@ -114,16 +116,19 @@ def comboSelect(eventObject):
     print("Nuevo elemento seleccionado:", select)
     if select == 0:
         colors = colorScaleMagma
+        colorSelection = "Magma"
     elif select == 1:
         colors = colorScaleSolar
+        colorSelection = "Solar"
     elif select == 2:
         colors = colorScaleThermal
+        colorSelection = "Thermal"
     elif select == 3:
         colors = colorScaleHaline
+        colorSelection = "Haline"
     else:
-        ## CAMBIAR PERSONALIZADO
-        colors = colorScaleMagma
-    ### TODAVIA NO FUNCIONA
+        colors = colorPers
+        colorSelection = "Personalizado"
     for i in range(0, 5):
         colorButtoms[i]['bg'] = colors[i]
 
@@ -147,19 +152,7 @@ columColFrame.pack()
 columCol1Buttom = tk.Button(columColFrame, anchor='nw', bg='black', width=8, relief="sunken")
 columCol1Buttom['command'] = partial(setBG, columCol1Buttom)
 columCol1Buttom.pack(side='left')
-# columCol2Buttom = tk.Button(columColFrame, anchor='nw', bg='gray25', width=2, relief="sunken")
-# columCol2Buttom['command'] = partial(setBG, columCol2Buttom)
-# columCol2Buttom.pack(side='left')
-# columCol3Buttom = tk.Button(columColFrame, anchor='nw', bg='gray25', width=2, relief="sunken")
-# columCol3Buttom['command'] = partial(setBG, columCol3Buttom)
-# columCol3Buttom.pack(side='left')
-# columCol4Buttom = tk.Button(columColFrame, anchor='nw', bg='gray25', width=2, relief="sunken")
-# columCol4Buttom['command'] = partial(setBG, columCol4Buttom)
-# columCol4Buttom.pack(side='left')
-# columCol5Buttom = tk.Button(columColFrame, anchor='nw', bg='gray25', width=2, relief="sunken")
-# columCol5Buttom['command'] = partial(setBG, columCol5Buttom)
-# columCol5Buttom.pack(side='left')
-# canvas.create_window(100, 327, window=columColFrame, anchor='nw')
+
 
 msjColVar = tk.Label(columColFrame, width=20, text="Color de las columnas",
                      fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
@@ -246,6 +239,9 @@ def generarVis():
                 "Normaliz": nor.get()
                 }
         print(dicc)
+        dataSet = lectura(dicc["FilePath"])
+        visualizar(dataSet,dicc)
+
 
 
 generarFrame = tk.Frame(canvas)
