@@ -28,7 +28,8 @@ def color():
 def setBG(button):
     col = color()
     button['bg'] = col
-    colorChange()
+    if("frame2" in str(button)):
+        colorChange()
     print(colorPers)
 
 
@@ -155,67 +156,67 @@ columColFrame.pack()
 
 columCol1Buttom = tk.Button(columColFrame, anchor='nw', bg='black', width=8, relief="sunken")
 columCol1Buttom['command'] = partial(setBG, columCol1Buttom)
-columCol1Buttom.pack(side='left')
+columCol1Buttom.pack(side='right')
 
 
-msjColVar = tk.Label(columColFrame, width=20, text="Color de las columnas",
+msjColVar = tk.Label(columColFrame, width=20, text="Color de los ejes",
                      fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
 msjColVar.pack(side='left')
-canvas.create_window(90, 375, window=columColFrame, anchor='nw')
+canvas.create_window(310, 313, window=columColFrame, anchor='nw')
 
-# WIDTH FRAMES
-widthFrame = tk.Frame(canvas, relief="groove")
-msjWidth = tk.Label(widthFrame, width=22, text="Ancho de las lineas",
-                    fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
-msjWidth.pack(side='top')
+# # WIDTH FRAMES
+# widthFrame = tk.Frame(canvas, relief="groove")
+# msjWidth = tk.Label(widthFrame, width=22, text="Ancho de las lineas",
+#                     fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
+# msjWidth.pack(side='top')
 
-# COLUMN WIDTH
-widthColFrame = tk.Frame(widthFrame, relief="groove")
-widthColFrame.pack()
+# # COLUMN WIDTH
+# widthColFrame = tk.Frame(widthFrame, relief="groove")
+# widthColFrame.pack()
 
-MODES = [
-    ("Grosor 1", 1),
-    ("Grosor 2", 2),
-    ("Grosor 3", 3),
-    # ("Grosor 4", "4"),
-]
+# MODES = [
+#     ("Grosor 1", 1),
+#     ("Grosor 2", 2),
+#     ("Grosor 3", 3),
+#     # ("Grosor 4", "4"),
+# ]
 
-colVar = tk.IntVar()
-colVar.set(1)  # initialize
-msjColWidth = tk.Label(widthColFrame, width=10, text="Columnas",
-                       fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
-msjColWidth.pack(side='top')
-colWidthList = []
-for text, mode in MODES:
-    b = tk.Radiobutton(widthColFrame, text=text, variable=colVar, value=mode, indicatoron=0, width=10)
-    colWidthList.append(b)
-    b.pack(anchor='w')
-widthColFrame.pack(side='left')
+# colVar = tk.IntVar()
+# colVar.set(1)  # initialize
+# msjColWidth = tk.Label(widthColFrame, width=10, text="Columnas",
+#                        fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
+# msjColWidth.pack(side='top')
+# colWidthList = []
+# for text, mode in MODES:
+#     b = tk.Radiobutton(widthColFrame, text=text, variable=colVar, value=mode, indicatoron=0, width=10)
+#     colWidthList.append(b)
+#     b.pack(anchor='w')
+# widthColFrame.pack(side='left')
 
-# VAR WIDTH
-widthVarFrame = tk.Frame(widthFrame, relief="groove")
-widthVarFrame.pack()
+# # VAR WIDTH
+# widthVarFrame = tk.Frame(widthFrame, relief="groove")
+# widthVarFrame.pack()
 
-MODES = [
-    ("Grosor 1", 1),
-    ("Grosor 2", 2),
-    ("Grosor 3", 3),
-    # ("Grosor 4", "4"),
-]
+# MODES = [
+#     ("Grosor 1", 1),
+#     ("Grosor 2", 2),
+#     ("Grosor 3", 3),
+#     # ("Grosor 4", "4"),
+# ]
 
-varVar = tk.IntVar()
-varVar.set(1)  # initialize
-msjVarWidth = tk.Label(widthVarFrame, width=10, text="Variables",
-                       fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
-msjVarWidth.pack(side='top')
-varWidthList = []
-for text, mode in MODES:
-    b = tk.Radiobutton(widthVarFrame, text=text, variable=varVar, value=mode, indicatoron=0, width=10)
-    varWidthList.append(b)
-    b.pack(anchor='w')
-widthColFrame.pack(side='right')
+# varVar = tk.IntVar()
+# varVar.set(1)  # initialize
+# msjVarWidth = tk.Label(widthVarFrame, width=10, text="Variables",
+#                        fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
+# msjVarWidth.pack(side='top')
+# varWidthList = []
+# for text, mode in MODES:
+#     b = tk.Radiobutton(widthVarFrame, text=text, variable=varVar, value=mode, indicatoron=0, width=10)
+#     varWidthList.append(b)
+#     b.pack(anchor='w')
+# widthColFrame.pack(side='right')
 
-canvas.create_window(340, 315, window=widthFrame, anchor='nw')
+# canvas.create_window(340, 315, window=widthFrame, anchor='nw')
 
 # CHECKBOX FRAME NORMALIZAR DATOS
 checkFrame = tk.Frame(canvas, relief="groove")
@@ -223,7 +224,7 @@ checkFrame.pack()
 nor = tk.IntVar()
 normalizar = tk.Checkbutton(checkFrame, text="¿Normalizar los datos numéricos?", variable=nor,
                             relief='groove', borderwidth=4, width=26, bg='#CBBC91', activebackground='#CBBC91').pack()
-canvas.create_window(90, 410, window=checkFrame, anchor='nw')
+canvas.create_window(310, 337, window=checkFrame, anchor='nw')
 
 
 # GENERAR VISUALIZACION FRAME
@@ -238,8 +239,8 @@ def generarVis():
                 "ColColor": columCol1Buttom.cget('bg'),
                 "VarColor": colorPers,
                 "ScaleNam": colorSelection,
-                "ColWidth": colVar.get(),
-                "VarWidth": varVar.get(),
+                #"ColWidth": colVar.get(),
+                #"VarWidth": varVar.get(),
                 "Normaliz": nor.get()
                 }
         print(dicc)
@@ -248,10 +249,11 @@ def generarVis():
 
 
 generarFrame = tk.Frame(canvas)
-generarButtom = tk.Button(generarFrame, text='¡Generar!', relief='groove', borderwidth=4)
+generarButtom = tk.Button(generarFrame, text='¡Generar!', font=("Verdana", 14), relief='groove', 
+    borderwidth=4,width=13, height=1,fg='black', bg='#CBBC91')
 generarButtom['command'] = partial(generarVis)
 generarButtom.pack()
 generarFrame.pack()
-canvas.create_window(175, 450, window=generarFrame, anchor='nw')
+canvas.create_window(220, 400, window=generarFrame, anchor='nw')
 
 root.mainloop()
