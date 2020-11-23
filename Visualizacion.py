@@ -85,10 +85,18 @@ def visualizar(dataSet, valoresGUI):
 
 # Funcion encargada de generar la visualización con los datos correspondientes
 def ejemplohtml(datos, dicc, cantDatos):
+    colores=0
     if(dicc["ScaleNam"]!="Personalizado"):
-        fig = go.Figure(data=go.Parcoords(line_color=list(range(1, cantDatos)), line_colorscale = dicc["ScaleNam"], dimensions=datos))
+        colores=dicc["ScaleNam"]
     else:
-        fig = go.Figure(data=go.Parcoords(line_color=list(range(1, cantDatos)), line_colorscale = dicc["VarColor"], dimensions=datos))
+        colores=dicc["VarColor"]
+
+    fig = go.Figure(data=go.Parcoords(line_color=list(range(1, cantDatos)), 
+        line_colorscale = colores, 
+        dimensions=datos,
+        labelfont_color=dicc["ColColor"],
+        labelfont_size=13,
+        rangefont_color=dicc["ColColor"]))
     
     # NEED FIX
     config = dict({
