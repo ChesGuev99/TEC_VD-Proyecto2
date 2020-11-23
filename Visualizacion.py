@@ -1,20 +1,14 @@
 import plotly.graph_objects as go
 
-
-def obtenerMaximoDatos(lista):
-    valorMaximo=0
-    for elemento in lista:
-        if(len(elemento)>valorMaximo):
-            print(len(elemento))
-            valorMaximo=len(elemento)+1
-    return 396
-
 # Funcion encargada de generar los diccionarios de valores a visualizar
 def visualizar(dataSet, valoresGUI):
     datos = []
+    cantDatos=0
     for item in dataSet:                                                    # Para cada elemento en el dicc dataSet
         if ((str(dataSet[item][0])).isdigit()) or isinstance((dataSet[item][0]), float):   # En caso de que sean números
-            dicc = dict(label=item, values=dataSet[item])
+            dicc = dict(label=item,values=dataSet[item])
+            if(len(dicc["values"])>cantDatos):
+                cantDatos=len(dicc["values"])
         else:                                                               # En caso de que sean nombres
             columna = []                                                    # Elementos existentes
             ubicaciones = []                                                # Ubicación de cada variable segun elemento
@@ -28,16 +22,18 @@ def visualizar(dataSet, valoresGUI):
                     max += 1
             dicc = dict(range=[1, max], tickvals=list(range(1, max+1)), label=item,
                         values=ubicaciones, ticktext=columna)
-        datos.append(dicc)                                                 # Agregue el elemento a datos
-    valorMaximo=obtenerMaximoDatos(datos)
-    ejemplohtml(datos, valoresGUI, valorMaximo)
+            if(max>cantDatos):
+                cantDatos=max
+        datos.append(dicc)                                     # Agregue el elemento a datos
+    ejemplohtml(datos, valoresGUI, cantDatos)
 
 
 # Funcion encargada de generar la visualización con los datos correspondientes
-def ejemplohtml(datos, dicc, valorMaximo):
-    
-    fig = go.Figure(data=go.Parcoords(line_color=list(range(1, valorMaximo)), line_colorscale = dicc["ScaleNam"], dimensions=datos))
-
+def ejemplohtml(datos, dicc, cantDatos):
+    if(dicc["ScaleNam"]!="Personalizado"):
+        fig = go.Figure(data=go.Parcoords(line_color=list(range(1, cantDatos)), line_colorscale = dicc["ScaleNam"], dimensions=datos))
+    else:
+        fig = go.Figure(data=go.Parcoords(line_color=list(range(1, cantDatos)), line_colorscale = dicc["VarColor"], dimensions=datos))
     # NEED FIX
     config = dict({
         'scrollZoom': True,
