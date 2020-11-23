@@ -6,13 +6,12 @@ from Prueba_filedialog import buscarArchivo
 from Excel import lectura
 from Visualizacion import visualizar
 
-normalizada = False
-
 colorPers = ['#FCFDBF', '#F66C5C', '#B4367A', '#5D187F', '#221150']
 colorSelection = "Magma"
 
 
 def colorChange():
+    global colorSelection, colorPers
     colorSelection = "Personalizado"
     combo.current(4)
     for i in range(0, 5):
@@ -112,6 +111,7 @@ colorScaleHaline = ['#29186B', '#125F8E', '#419D85', '#9FD55B', '#FDEE99']
 
 
 def comboSelect(eventObject):
+    global colorSelection, colorPers
     select = combo.current()
     print("Nuevo elemento seleccionado:", select)
     if select == 0:
@@ -119,15 +119,19 @@ def comboSelect(eventObject):
         colorSelection = "Magma"
     elif select == 1:
         colors = colorScaleSolar
+
         colorSelection = "Solar"
     elif select == 2:
         colors = colorScaleThermal
+
         colorSelection = "Thermal"
     elif select == 3:
         colors = colorScaleHaline
+
         colorSelection = "Haline"
     else:
         colors = colorPers
+
         colorSelection = "Personalizado"
     for i in range(0, 5):
         colorButtoms[i]['bg'] = colors[i]
@@ -240,8 +244,7 @@ def generarVis():
                 }
         print(dicc)
         dataSet = lectura(dicc["FilePath"])
-        visualizar(dataSet,dicc)
-
+        visualizar(dataSet, dicc)
 
 
 generarFrame = tk.Frame(canvas)
