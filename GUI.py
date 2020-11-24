@@ -234,19 +234,19 @@ def generarVis():
         tk.messagebox.showwarning(message="¡Parece que no has seleccionado un archivo!", title="Error de Archivo")
 
     else:
-        dicc = {"FilePath": filePathLabel.cget("text"),
-                "ColColor": columCol1Buttom.cget('bg'),
-                "VarColor": colorPers,
-                "ScaleNam": colorSelection,
+        dicc = {"FilePath": filePathLabel.cget("text"),         # Path
+                "ColColor": columCol1Buttom.cget('bg'),         # Color de la columna
+                "VarColor": colorPers,                          # Lista de colores de la escala
+                "ScaleNam": colorSelection,                     # Nombre de la escala
                 # "ColWidth": colVar.get(),
                 # "VarWidth": varVar.get(),
-                "Normaliz": nor.get()
+                "Normaliz": nor.get()                           # 1 si se normaliza, 0 si no
                 }
         print(dicc)
-        dataSet = lectura(dicc["FilePath"])
-        visualizar(dataSet, dicc)
+        dataSet = lectura(dicc["FilePath"])                     # Recolección de datos del archivo
+        visualizar(dataSet, dicc)                               # Visualización del conjunto
 
-
+# Frame para el botón generar
 generarFrame = tk.Frame(canvas)
 generarButtom = tk.Button(generarFrame, text='¡Generar!', font=("Verdana", 14), relief='groove',
                           borderwidth=4, width=13, height=1, fg='black', bg='#CBBC91')

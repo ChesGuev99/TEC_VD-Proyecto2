@@ -1,5 +1,5 @@
 import plotly.graph_objects as go
-
+import plotly.express as px
 
 # Esta función se utiliza para la normalización del gráfico
 # Se obtiene el menor valor numérico de todos los datos
