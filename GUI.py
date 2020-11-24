@@ -20,7 +20,7 @@ def colorChange():
 
 def color():
     # variable to store hexadecimal code of color
-    color_code = colorchooser.askcolor(title="Choose color")
+    color_code = colorchooser.askcolor(title="Seleccione un color")
     print(color_code)
     return color_code[1]
 
@@ -28,7 +28,7 @@ def color():
 def setBG(button):
     col = color()
     button['bg'] = col
-    if("frame2" in str(button)):
+    if ("frame2" in str(button)):
         colorChange()
     print(colorPers)
 
@@ -158,7 +158,6 @@ columCol1Buttom = tk.Button(columColFrame, anchor='nw', bg='black', width=8, rel
 columCol1Buttom['command'] = partial(setBG, columCol1Buttom)
 columCol1Buttom.pack(side='right')
 
-
 msjColVar = tk.Label(columColFrame, width=20, text="Color de los ejes",
                      fg='black', bg='#CBBC91', borderwidth=4, relief="groove")
 msjColVar.pack(side='left')
@@ -231,7 +230,7 @@ canvas.create_window(310, 337, window=checkFrame, anchor='nw')
 
 
 def generarVis():
-    if filePathLabel.cget("text") == '' :
+    if filePathLabel.cget("text") == '':
         tk.messagebox.showwarning(message="¡Parece que no has seleccionado un archivo!", title="Error de Archivo")
 
     else:
@@ -239,8 +238,8 @@ def generarVis():
                 "ColColor": columCol1Buttom.cget('bg'),
                 "VarColor": colorPers,
                 "ScaleNam": colorSelection,
-                #"ColWidth": colVar.get(),
-                #"VarWidth": varVar.get(),
+                # "ColWidth": colVar.get(),
+                # "VarWidth": varVar.get(),
                 "Normaliz": nor.get()
                 }
         print(dicc)
@@ -249,8 +248,8 @@ def generarVis():
 
 
 generarFrame = tk.Frame(canvas)
-generarButtom = tk.Button(generarFrame, text='¡Generar!', font=("Verdana", 14), relief='groove', 
-    borderwidth=4,width=13, height=1,fg='black', bg='#CBBC91')
+generarButtom = tk.Button(generarFrame, text='¡Generar!', font=("Verdana", 14), relief='groove',
+                          borderwidth=4, width=13, height=1, fg='black', bg='#CBBC91')
 generarButtom['command'] = partial(generarVis)
 generarButtom.pack()
 generarFrame.pack()

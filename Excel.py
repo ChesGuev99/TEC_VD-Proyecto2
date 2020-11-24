@@ -1,5 +1,6 @@
 import xlrd
 
+
 def lectura(path):
     loc = path
 
@@ -8,17 +9,16 @@ def lectura(path):
     sheet = wb.sheet_by_index(0)
 
     # For row 0 and column 0
-    #print(sheet.cell_value(0, 0))
+    # print(sheet.cell_value(0, 0))
     dataDicc = {}
     for col in range(sheet.ncols):
-        print(sheet.cell_value(0,col))
-        ejeName = (sheet.cell_value(0,col))
+        print(sheet.cell_value(0, col))
+        ejeName = (sheet.cell_value(0, col))
         dataSet = []
-        for row in range(1,sheet.nrows):
-            dataSet.append(sheet.cell_value(row,col))
+        for row in range(1, sheet.nrows):
+            dataSet.append(sheet.cell_value(row, col))
         dataDicc[ejeName] = dataSet
 
-        print(dataDicc[ejeName])
         print(len(dataDicc[ejeName]))
+    print(dataDicc)
     return dataDicc
-
